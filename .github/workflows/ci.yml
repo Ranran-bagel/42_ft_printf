@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: make
+
+      - name: Verify library
+        run: test -f libftprintf.a
+
+      - name: Test compilation
+        run: |
+          cat > /tmp/test_printf.c <<'EOF'
+          #include "ft_printf.h"
+
+          int main(void)
+          {
+              ft_printf("Hello %s, number = %d, hex = %x\n", "world", 42, 42);
+              return (0);
+          }
+          EOF
+
+          cc -Wall -Wextra -Werror \
+            -I. /tmp/test_printf.c libftprintf.a \
+            -o /tmp/test_printf
+
+          /tmp/test_printf
+
+      - name: Clean
+        run: make fclean
