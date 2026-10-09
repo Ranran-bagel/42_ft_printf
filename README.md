@@ -2,6 +2,8 @@
 
 # ft_printf
 
+[![CI](https://github.com/Ranran-bagel/42_ft_printf/actions/workflows/ci.yml/badge.svg)](https://github.com/Ranran-bagel/42_ft_printf/actions/workflows/ci.yml)
+
 ## Description
 
 `ft_printf` is a custom implementation of the standard C `printf` function.
